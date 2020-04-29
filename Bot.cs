@@ -16,7 +16,7 @@
         public void Hit (Bot bot, Character character)
         {
             if (bot.X - character.X <= HitRange && bot.Y - character.Y <= HitRange
-                || character.X - bot.X <= HitRange && character.Y - bot.Y <= HitRange)
+                && character.X - bot.X <= HitRange && character.Y - bot.Y <= HitRange)
                     character.Hp -= 30;
         }
     }
