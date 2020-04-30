@@ -9,7 +9,6 @@ namespace Quests
         public int X { get; set; }
         public int Y { get; set; }
         public decimal Hp { get; set; } = 100m;
-        int HitRange = 1;
 
         public Character(int X, int Y)
         {
@@ -19,15 +18,13 @@ namespace Quests
 
         public void Hit(Character character, Bot bot)
         {
-            if (bot.X - character.X <= HitRange && bot.Y - character.Y <= HitRange
-                && character.X - bot.X <= HitRange && character.Y - bot.Y <= HitRange)
+            if (Geometry.AreNear(bot.X, character.X, bot.Y, character.Y))
                 bot.Hp -= 40;
         }
 
         public void HitRock(Character character, Rock rock)
         {
-            if (rock.X - character.X <= HitRange && rock.Y - character.Y <= HitRange
-                && character.X - rock.X <= HitRange && character.Y - rock.Y <= HitRange)
+            if (Geometry.AreNear(character.X, rock.X, character.Y, rock.Y))
                 rock.Hp -= 0;
         }
     }
