@@ -4,31 +4,27 @@ using System.Text;
 
 namespace Quests
 {
-    public class Character
+    public class Character : Body, IAttacer
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public decimal Hp { get; set; } = 100m;
-        int HitRange = 1;
-
         public Character(int X, int Y)
         {
             this.X = X;
             this.Y = Y;
         }
 
-        public void Hit(Character character, Bot bot)
+        public void Hit(Body body1, Body body2) // body1 - кто бьёт, body2 - кого бьют
         {
-            if (bot.X - character.X <= HitRange && bot.Y - character.Y <= HitRange
-                && character.X - bot.X <= HitRange && character.Y - bot.Y <= HitRange)
-                bot.Hp -= 40;
-        }
-
-        public void HitRock(Character character, Rock rock)
-        {
-            if (rock.X - character.X <= HitRange && rock.Y - character.Y <= HitRange
-                && character.X - rock.X <= HitRange && character.Y - rock.Y <= HitRange)
-                rock.Hp -= 0;
+            if (body2 is Rock)
+            {
+                if (Geometry.AreNear(body1.X, body2.X, body1.Y, body2.Y))
+                    body2.Hp -= 0;
+            }
+            else
+            {
+                if (Geometry.AreNear(body1.X, body2.X, body1.Y, body2.Y))
+                    body2.Hp -= 40;
+                
+            }
         }
     }
 }
