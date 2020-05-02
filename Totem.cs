@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quests
 {
-    class Totem : Body
+    class Totem : Body, IUnhittable
     {
         public string src = "./totem";
 

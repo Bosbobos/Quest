@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Quests
 {
-    class Bush : Body
+    class Bush : Body, IUnhittable
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-
         public string src = "./bush";
 
         public Bush(int X, int Y)

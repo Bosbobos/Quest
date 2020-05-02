@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quests
 {
-    public class Rock : Body
+    public class Rock : Body, IUnhittable
     {
         public new decimal Hp { get; set; } = 1000m;
         public string src = "./rock";

@@ -19,17 +19,14 @@ namespace Quests
                     target.Hp -= 40;
             }
         }
-        // TODO
-        /*
+
      public void CoordHit(Character character, List<Body> list, int X, int Y)
      {
          foreach (var targets in list)
          {
-             if (X == list.X && Y == list[].Y)
-                 bot.Hp -= 20;
+             if (X == targets.X && Y == targets.Y)
+                 targets.Hp -= 20;
          }
-
      }
-     */
     }
 }

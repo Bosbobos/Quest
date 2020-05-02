@@ -15,7 +15,7 @@ namespace Quests
 
         public void Hit(Character character, Body target) // body1 - кто бьёт, body2 - кого бьют
         {
-            if (target is Rock)
+            if (target is IUnhittable)
             {
                 if (Geometry.AreNear(character.X, target.X, character.Y, target.Y))
                 {
@@ -32,6 +32,25 @@ namespace Quests
                     character.Mana -= 20;
                 }
                 
+            }
+        }
+        public void CoordHit(Character character, List<Body> list, int X, int Y)
+        {
+            foreach (var targets in list)
+            {
+                if (X == targets.X && Y == targets.Y)
+                {
+                    if (targets is IUnhittable)
+                    {
+                        targets.Hp -= 0;
+                        character.Mana -= 20;
+                    }
+                    else
+                    {
+                        targets.Hp -= 40;
+                        character.Mana -= 20;
+                    }
+                }
             }
         }
     }

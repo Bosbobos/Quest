@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quests
 {
-    class Tree : Body
+    class Tree : Body, IUnhittable
     {
         public string src = "./tree";
 

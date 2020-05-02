@@ -16,6 +16,20 @@ namespace Quests
 
             var bodies = new List<Body> { character, bot, rock, totem, tree, bush };
 
+            foreach (var lists in bodies)
+                Console.WriteLine(lists.Hp);
+
+            Console.WriteLine(character.Mana);
+
+            character.CoordHit(character, bodies, character.X - 1, character.Y);
+            character.CoordHit(character, bodies, character.X + 1, character.Y);
+            character.CoordHit(character, bodies, character.X + 1, character.Y + 1);
+            character.CoordHit(character, bodies, character.X - 1, character.Y - 1);
+
+            foreach (var lists in bodies)
+                Console.WriteLine(lists.Hp);
+
+            Console.WriteLine(character.Mana);
             /*
             Console.WriteLine("Хп персонажа " + character.Hp);
             Console.WriteLine("Хп бота " + bot.Hp);
