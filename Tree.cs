@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Quests
 {
-    public class Rock : Body
+    class Tree : Body
     {
-        public new decimal Hp { get; set; } = 1000m;
-        public string src = "./rock";
+        public string src = "./tree";
 
-        public Rock (int X, int Y)
+        public Tree(int X, int Y)
         {
             this.X = X;
             this.Y = Y;

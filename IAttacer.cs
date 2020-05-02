@@ -6,18 +6,30 @@ namespace Quests
 {
     interface IAttacer
     {
-        public void Hit(Body body1, Body body2) // body1 - кто бьёт, body2 - кого бьют
+        public void Hit(Body body, Body target) // body1 - кто бьёт, body2 - кого бьют
         {
-            if (body2 is Rock)
+            if (target is Rock)
             {
-                if (Geometry.AreNear(body1.X, body2.X, body1.Y, body2.Y))
-                    body2.Hp -= 0;
+                if (Geometry.AreNear(body.X, target.X, body.Y, target.Y))
+                    target.Hp -= 0;
             }
             else
             {
-                if (Geometry.AreNear(body1.X, body2.X, body1.Y, body2.Y))
-                    body2.Hp -= 40;
+                if (Geometry.AreNear(body.X, target.X, body.Y, target.Y))
+                    target.Hp -= 40;
             }
         }
+        // TODO
+        /*
+     public void CoordHit(Character character, List<Body> list, int X, int Y)
+     {
+         foreach (var targets in list)
+         {
+             if (X == list.X && Y == list[].Y)
+                 bot.Hp -= 20;
+         }
+
+     }
+     */
     }
 }
