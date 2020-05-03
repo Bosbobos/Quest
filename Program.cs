@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Quests
 {
@@ -7,20 +9,74 @@ namespace Quests
         static void Main(string[] args)
         {
             var character = new Character(0, 0);
-            var bot = new Bot(0, 1);
-            var rock = new Rock(0, 1);
+            var bot = new Bot(1, 1);
+            var rock = new Rock(2, 3);
+            var totem = new Totem(1, 1);
+            var tree = new Tree(2, 2);
+            var bush = new Bush(1, 1);
 
-            Console.WriteLine("Хп персонажа " + character.Hp);
-            Console.WriteLine("Хп бота " + bot.Hp);
-            Console.WriteLine("Хп камня " + rock.Hp);
+            var bodies = new List<Body> { character, bot, rock, totem, tree, bush };
 
-            character.Hit(character, bot);
+            Console.WriteLine("Бьёт персонаж");
+            
+            Console.WriteLine("");
+            foreach (var lists in bodies)
+                Console.WriteLine($"{lists.GetType().Name}: {lists.Hp}.");
+            
+            Console.WriteLine("");
+            Console.WriteLine("Мана" + character.Mana);
+
+            character.CoordHit(character, bodies, character.X - 1, character.Y);
+            character.CoordHit(character, bodies, character.X + 1, character.Y);
+            character.CoordHit(character, bodies, character.X + 1, character.Y + 1);
+            character.CoordHit(character, bodies, character.X - 1, character.Y - 1);
+
+            Console.WriteLine("");
+            foreach (var lists in bodies)
+                Console.WriteLine($"{lists.GetType().Name}: {lists.Hp}.");
+
+            Console.WriteLine("");
+            Console.WriteLine("Мана" + character.Mana);
+
+            Console.WriteLine("");
+            Console.WriteLine("Бьёт бот");
+            
+            bot.CoordHit(bot, bodies, bot.X - 1, bot.Y);
+            bot.CoordHit(bot, bodies, bot.X + 1, bot.Y);
+            bot.CoordHit(bot, bodies, bot.X + 1, bot.Y + 1);
+            bot.CoordHit(bot, bodies, bot.X - 1, bot.Y - 1);
+
+            Console.WriteLine("");
+            foreach (var lists in bodies)
+                Console.WriteLine($"{lists.GetType().Name}: {lists.Hp}.");
+
+            Console.WriteLine("");
+            Console.WriteLine("Последняя часть");
+
+            Console.WriteLine("");
+            Console.WriteLine("Bot:" + bot.Hp);
+            Console.WriteLine("Character:" + character.Hp);
+
             bot.Hit(bot, character);
-            character.Hit(character, rock);
+            character.Hit(character, bot);
 
-            Console.WriteLine("Хп персонажа " + character.Hp);
-            Console.WriteLine("Хп бота " + bot.Hp);
-            Console.WriteLine("Хп камня " + rock.Hp);
+            Console.WriteLine("");
+            Console.WriteLine("Bot:" + bot.Hp);
+            Console.WriteLine("Character:" + character.Hp);
+
+            while (true)
+            {
+                AccomplishTact(character, totem);
+                Thread.Sleep(5000);
+            }
+        }
+
+        static void AccomplishTact(Character character, Totem totem)
+        {
+            character.Mana += 5;
+            if (Geometry.AreNear(character.X, totem.X, character.Y, totem.Y))
+                character.Mana += 2;
+            Console.WriteLine(character.Mana);
         }
     }
 }
