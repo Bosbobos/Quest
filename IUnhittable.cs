@@ -5,7 +5,7 @@ using System.Text;
 namespace Quests
 {
     /// <summary>
-    /// То, что нельзя ударить (камень, дерево и т.п.)
+    /// Те, кого нельзя поразить не физической магией
     /// </summary>
     interface IUnhittable 
     {

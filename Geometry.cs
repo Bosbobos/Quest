@@ -6,8 +6,10 @@ namespace Quests
 {
     public static class Geometry
     {
-        // Проверка рядом ли объекты \\
         public static int HitRange = 1;
+        /// <summary>
+        /// Проверка рядом ли объекты
+        /// </summary>
         public static bool AreNear(int X1, int X2, int Y1, int Y2)
         { 
             if (X1 - X2 <= HitRange && Y1 - Y2 <= HitRange

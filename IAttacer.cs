@@ -4,29 +4,10 @@ using System.Text;
 
 namespace Quests
 {
+    /// <summary>
+    /// Значит, что реализующий этот интерфейс умеет атаковать
+    /// </summary>
     interface IAttacer
     {
-        public void Hit(Body body, Body target) // body1 - кто бьёт, body2 - кого бьют
-        {
-            if (target is Rock)
-            {
-                if (Geometry.AreNear(body.X, target.X, body.Y, target.Y))
-                    target.Hp -= 0;
-            }
-            else
-            {
-                if (Geometry.AreNear(body.X, target.X, body.Y, target.Y))
-                    target.Hp -= 40;
-            }
-        }
-
-     public void CoordHit(Character character, List<Body> list, int X, int Y)
-     {
-         foreach (var targets in list)
-         {
-             if (X == targets.X && Y == targets.Y)
-                 targets.Hp -= 20;
-         }
-     }
     }
 }

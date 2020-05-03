@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Quests
 {
-    class Bush : Body, IUnhittable
+    public class Bush : Body, IUnhittable
     {
         public string src = "./bush";
 
-        public Bush(int X, int Y)
+        public Bush(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
             this.X = X;
             this.Y = Y;
