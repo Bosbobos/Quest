@@ -29,9 +29,6 @@ namespace Quests
             foreach (var targets in list)
             {
                 if (X == targets.X && Y == targets.Y)
-                    if (targets is IUnhittable)
-                        targets.Hp -= 0;
-                    else
                         targets.Hp -= 30;
             }
         }
