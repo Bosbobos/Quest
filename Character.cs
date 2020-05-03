@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quests
 {
-    public class Character : Body, IAttacer
+    public class Character : Body, IAttacker
     {
         public int Mana = 100;
         public Character(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
@@ -27,7 +27,6 @@ namespace Quests
                     target.Hp -= 0; // Ничего не наносим
                     character.Mana -= 20; // Но ману снимаем
                 }
-
             }
             else
             {
@@ -35,8 +34,7 @@ namespace Quests
                 {
                     target.Hp -= 40; // Уже наносим дамаг
                     character.Mana -= 20; // Но всё ещё снимаем ману
-                }
-                
+                }               
             }
         }
 
@@ -66,5 +64,20 @@ namespace Quests
                 }
             }
         }
+
+        public void RangedHit(Character character, Body target)
+        {
+            if (target is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+            {
+                target.Hp -= 0; // Ничего не наносим
+                character.Mana -= 20; // Но ману снимаем
+            }
+            else
+            {
+                target.Hp -= 15; // Уже наносим дамаг
+                character.Mana -= 20; // Но всё ещё снимаем ману
+            }
+        }
+
     }
 }

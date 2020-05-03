@@ -7,7 +7,10 @@ namespace Quests
     /// <summary>
     /// Значит, что реализующий этот интерфейс умеет атаковать
     /// </summary>
-    interface IAttacer
+    interface IAttacker
     {
+        public void Hit()
+        {
+        }
     }
 }

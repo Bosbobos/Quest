@@ -2,7 +2,7 @@
 
 namespace Quests
 {
-    public class Bot : Body, IAttacer
+    public class Bot : Body, IAttacker
     {
         public Bot(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {

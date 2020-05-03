@@ -66,7 +66,9 @@ namespace Quests
 
             while (true)
             {
-                Tact.AccomplishTact(character, totem);
+                Tact.ManaRegen(character, totem);
+                Tact.MoveToTarget(bot, character);
+                character.RangedHit(character, bot);
                 Thread.Sleep(5000);
             }
         }
