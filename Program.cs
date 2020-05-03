@@ -66,17 +66,9 @@ namespace Quests
 
             while (true)
             {
-                AccomplishTact(character, totem);
+                Tact.AccomplishTact(character, totem);
                 Thread.Sleep(5000);
             }
-        }
-
-        static void AccomplishTact(Character character, Totem totem)
-        {
-            character.Mana += 5;
-            if (Geometry.AreNear(character.X, totem.X, character.Y, totem.Y))
-                character.Mana += 2;
-            Console.WriteLine(character.Mana);
         }
     }
 }
