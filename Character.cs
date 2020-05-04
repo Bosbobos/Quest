@@ -79,21 +79,21 @@ namespace Quests
             }
         }
 
-        public static void AccompishTakt(Character character, Totem totem, Body target)
+        public void AccomplishTakt(Character character, Body body, Totem totem)
         {
             character.Mana += 5;
             if (Geometry.AreNear(character, totem))
                 character.Mana += 2;
             Console.WriteLine(character.Mana);
 
-            if (target is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+            if (body is IUnhittable) // Проверяем воспринимает ли цель не физ урон
             {
-                target.Hp -= 0; // Ничего не наносим
+                body.Hp -= 0; // Ничего не наносим
                 character.Mana -= 20; // Но ману снимаем
             }
             else
             {
-                target.Hp -= 15; // Уже наносим дамаг
+                body.Hp -= 15; // Уже наносим дамаг
                 character.Mana -= 20; // Но всё ещё снимаем ману
             }
         }

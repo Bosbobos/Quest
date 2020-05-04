@@ -36,23 +36,23 @@ namespace Quests
             }
         }
 
-        public static void AccomplishTakt(Body attacker, Body target)
+        public void AccomplishTakt(Character character, Body body, Totem totem)
         {
-            if (!Geometry.AreNear(attacker, target))
+            if (!Geometry.AreNear(body, character))
             {
-                if (!Geometry.AreNearX(attacker.X, target.X))
+                if (!Geometry.AreNearX(body.X, character.X))
                 {
-                    attacker.X--;
+                    body.X--;
                 }
-                else if (!Geometry.AreNearY(attacker.Y, target.Y))
+                else if (!Geometry.AreNearY(body.Y, character.Y))
                 {
-                    attacker.Y--;
+                    body.Y--;
                 }
             }
             else
             {
-                if (Geometry.AreNear(attacker, target)) // Проверяем рядом ли они
-                    target.Hp -= 30;
+                if (Geometry.AreNear(body, character)) // Проверяем рядом ли они
+                    character.Hp -= 30;
             }
         }
     }

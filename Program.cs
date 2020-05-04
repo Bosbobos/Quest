@@ -15,7 +15,8 @@ namespace Quests
            
             while (true)
             {
-                character.RangedHit(character, bot);
+                foreach (var Accomplishers in IAccomplishers)
+                        Accomplishers.AccomplishTakt();                    
                 Thread.Sleep(5000);
             }
         }
