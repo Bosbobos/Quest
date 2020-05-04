@@ -2,7 +2,7 @@
 
 namespace Quests
 {
-    public class Bot : Body, IAttacker
+    public class Bot : Body, IAttacker, IAccoplishTakt
     {
         public Bot(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
@@ -16,11 +16,8 @@ namespace Quests
         /// <param name="body2">Кого бьют</param>
         public void Hit(Body body1, Body body2) 
         {
-            if (body2 is IUnhittable) // Проверяем воспринимает ли враг
-            {
-                if (Geometry.AreNear(body1.X, body2.X, body1.Y, body2.Y)) // Проверяем рядом ли они
-                    body2.Hp -= 30;
-            }
+            if (Geometry.AreNear(body1, body2)) // Проверяем рядом ли они
+                body2.Hp -= 30;
         }
 
         /// <summary>
@@ -36,6 +33,26 @@ namespace Quests
             {
                 if (X == targets.X && Y == targets.Y)
                         targets.Hp -= 30;
+            }
+        }
+
+        public static void AccomplishTakt(Body attacker, Body target)
+        {
+            if (!Geometry.AreNear(attacker, target))
+            {
+                if (!Geometry.AreNearX(attacker.X, target.X))
+                {
+                    attacker.X--;
+                }
+                else if (!Geometry.AreNearY(attacker.Y, target.Y))
+                {
+                    attacker.Y--;
+                }
+            }
+            else
+            {
+                if (Geometry.AreNear(attacker, target)) // Проверяем рядом ли они
+                    target.Hp -= 30;
             }
         }
     }

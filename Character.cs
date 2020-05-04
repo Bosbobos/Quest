@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quests
 {
-    public class Character : Body, IAttacker
+    public class Character : Body, IAttacker, IAccoplishTakt
     {
         public int Mana = 100;
         public Character(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
@@ -22,7 +22,7 @@ namespace Quests
         {
             if (target is IUnhittable) // Проверяем воспринимает ли цель не физ урон
             {
-                if (Geometry.AreNear(character.X, target.X, character.Y, target.Y)) // Если не воспринмает
+                if (Geometry.AreNear(character, target)) // Если не воспринмает
                 {
                     target.Hp -= 0; // Ничего не наносим
                     character.Mana -= 20; // Но ману снимаем
@@ -30,7 +30,7 @@ namespace Quests
             }
             else
             {
-                if (Geometry.AreNear(character.X, target.X, character.Y, target.Y)) // ЕСли воспринимает
+                if (Geometry.AreNear(character, target)) // ЕСли воспринимает
                 {
                     target.Hp -= 40; // Уже наносим дамаг
                     character.Mana -= 20; // Но всё ещё снимаем ману
@@ -79,5 +79,23 @@ namespace Quests
             }
         }
 
+        public static void AccompishTakt(Character character, Totem totem, Body target)
+        {
+            character.Mana += 5;
+            if (Geometry.AreNear(character, totem))
+                character.Mana += 2;
+            Console.WriteLine(character.Mana);
+
+            if (target is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+            {
+                target.Hp -= 0; // Ничего не наносим
+                character.Mana -= 20; // Но ману снимаем
+            }
+            else
+            {
+                target.Hp -= 15; // Уже наносим дамаг
+                character.Mana -= 20; // Но всё ещё снимаем ману
+            }
+        }
     }
 }
