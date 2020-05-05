@@ -36,24 +36,33 @@ namespace Quests
             }
         }
 
-        public void AccomplishTakt(Character character, Body body, Totem totem)
+        public void AccomplishTakt(List<IAccoplishTakt> list)
         {
-            if (!Geometry.AreNear(body, character))
+            Character character = new Character(0, 0);
+            Bot bot = new Bot(0, 0);
+
+            foreach(var lists in list)
             {
-                if (!Geometry.AreNearX(body.X, character.X))
+                if (lists is Bot)
+                    bot = lists as Bot;
+
+                else if (lists is Character)
+                    character = lists as Character;
+            }
+            
+            if (!Geometry.AreNear(bot, character))
+            {
+                if (!Geometry.AreNearX(bot.X, character.X))
                 {
-                    body.X--;
+                    bot.X--;
                 }
-                else if (!Geometry.AreNearY(body.Y, character.Y))
+                else if (!Geometry.AreNearY(bot.Y, character.Y))
                 {
-                    body.Y--;
+                    bot.Y--;
                 }
             }
             else
-            {
-                if (Geometry.AreNear(body, character)) // Проверяем рядом ли они
                     character.Hp -= 30;
-            }
         }
     }
 }
