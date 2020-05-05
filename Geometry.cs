@@ -39,5 +39,16 @@ namespace Quests
             else
                 return false;
         }
+
+        public static Body TheNearest(Body body1 ,List<Body> bodies)
+        {            
+            int check1;
+            List<Body> checked;
+
+            foreach (var body2 in bodies)
+            {
+                check1 = (body1.X - body2.X) + (body1.Y - body2.Y);
+            }
+        }
     }
 }

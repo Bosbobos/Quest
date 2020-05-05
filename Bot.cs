@@ -27,7 +27,7 @@ namespace Quests
         /// <param name="list">Список врагов(кого в теории мы можем ударить)</param>
         /// <param name="X">Х куда ударить</param>
         /// <param name="Y">Y куда ударить</param>
-        public void CoordHit(Bot bot, List<Body> list, int X, int Y)
+        public void CoordHit(List<Body> list, int X, int Y)
         {
             foreach (var targets in list)
             {
@@ -38,19 +38,22 @@ namespace Quests
 
         public void AccomplishTakt(List<IAccoplishTakt> list)
         {
-            Character character = new Character(0, 0);
-            Bot bot = new Bot(0, 0);
-
-            foreach(var lists in list)
-            {
+            Bot bot;
+            Character character;
+            foreach (var lists in list)
+            {                
                 if (lists is Bot)
                     bot = lists as Bot;
 
                 else if (lists is Character)
                     character = lists as Character;
             }
-            
-            if (!Geometry.AreNear(bot, character))
+
+            if (Geometry.AreNear(bot, character))
+            {
+                character.Hp -= 30;
+            }
+            else
             {
                 if (!Geometry.AreNearX(bot.X, character.X))
                 {
@@ -61,8 +64,6 @@ namespace Quests
                     bot.Y--;
                 }
             }
-            else
-                    character.Hp -= 30;
         }
     }
 }
