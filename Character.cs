@@ -7,6 +7,7 @@ namespace Quests
     public class Character : Body, IAttacker, IAccoplishTakt
     {
         public int Mana = 100;
+        public static int HitRange = 1;
         public Character(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
             this.X = X;
@@ -22,7 +23,7 @@ namespace Quests
         {
             if (target is IUnhittable) // Проверяем воспринимает ли цель не физ урон
             {
-                if (Geometry.AreNear(character, target)) // Если не воспринмает
+                if (Geometry.AreNear(character, target, HitRange)) // Если не воспринмает
                 {
                     target.Hp -= 0; // Ничего не наносим
                     character.Mana -= 20; // Но ману снимаем
@@ -30,7 +31,7 @@ namespace Quests
             }
             else
             {
-                if (Geometry.AreNear(character, target)) // ЕСли воспринимает
+                if (Geometry.AreNear(character, target, HitRange)) // ЕСли воспринимает
                 {
                     target.Hp -= 40; // Уже наносим дамаг
                     character.Mana -= 20; // Но всё ещё снимаем ману
@@ -82,7 +83,7 @@ namespace Quests
         public void AccomplishTakt(Character character, Body body, Totem totem)
         {
             character.Mana += 5;
-            if (Geometry.AreNear(character, totem))
+            if (Geometry.AreNear(character, totem, HitRange))
                 character.Mana += 2;
             Console.WriteLine(character.Mana);
 

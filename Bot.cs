@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Quests
 {
     public class Bot : Body, IAttacker, IAccoplishTakt
     {
+        public static int HitRange = 1;
         public Bot(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
             this.X = X;
@@ -16,7 +18,7 @@ namespace Quests
         /// <param name="body2">Кого бьют</param>
         public void Hit(Body body1, Body body2) 
         {
-            if (Geometry.AreNear(body1, body2)) // Проверяем рядом ли они
+            if (Geometry.AreNear(body1, body2, HitRange)) // Проверяем рядом ли они
                 body2.Hp -= 30;
         }
 
@@ -36,34 +38,38 @@ namespace Quests
             }
         }
 
-        public void AccomplishTakt(List<IAccoplishTakt> list)
+        public void AccomplishTakt(List<Body> bodies)
         {
-            Bot bot;
-            Character character;
-            foreach (var lists in list)
-            {                
-                if (lists is Bot)
-                    bot = lists as Bot;
+            // стукнуть ближайшего персонажа
+            // если такого нет, то идем к ближайшему
 
-                else if (lists is Character)
-                    character = lists as Character;
-            }
+            // получаем все тела персонажей
+            // выбрать все уэлементы, у которых (тип Персонаж)
+            var charactersBodyes = bodies.Where(b => b is Character)  // b - элемент коллекции, как если бы ты написал foraech(var b in bodies)
+                                         .ToList();
 
-            if (Geometry.AreNear(bot, character))
+            var телаПерсонажейВрадиусеУдара = Geometry.TheNearest(this, charactersBodyes, HitRange);
+
+            if (телаПерсонажейВрадиусеУдара.Count > 0) // если рядом кто-то есть, то бьем его
             {
-                character.Hp -= 30;
+                Character target = телаПерсонажейВрадиусеУдара.First() as Character;
+                target.Hp -= 30; // бьем цель
             }
-            else
+            else // идем в нему
             {
-                if (!Geometry.AreNearX(bot.X, character.X))
+                Character target = charactersBodyes.First() as Character;
+                
+                // меняем координаты this.X и Y в сторону перса
+                if (!Geometry.AreNearX(this.X, target.X, HitRange))
                 {
-                    bot.X--;
+                    this.X--;
                 }
-                else if (!Geometry.AreNearY(bot.Y, character.Y))
+                else if (!Geometry.AreNearY(this.Y, target.Y, HitRange))
                 {
-                    bot.Y--;
+                    this.Y--;
                 }
-            }
+                
+            }            
         }
     }
 }

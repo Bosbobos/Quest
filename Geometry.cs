@@ -6,11 +6,10 @@ namespace Quests
 {
     public static class Geometry
     {
-        public static int HitRange = 1;
         /// <summary>
         /// Проверка рядом ли объекты
         /// </summary>
-        public static bool AreNear(Body body1, Body body2)
+        public static bool AreNear(Body body1, Body body2, int HitRange)
         {
             int X1 = body1.X;
             int X2 = body2.X;
@@ -24,7 +23,7 @@ namespace Quests
                 return false;
         }
 
-        public static bool AreNearX(int X1, int X2)
+        public static bool AreNearX(int X1, int X2, int HitRange)
         {
             if (X1 - X2 <= HitRange && X2 - X1 <= HitRange)
                 return true;
@@ -32,7 +31,7 @@ namespace Quests
                 return false;
         }
 
-        public static bool AreNearY(int Y1, int Y2)
+        public static bool AreNearY(int Y1, int Y2, int HitRange)
         {
             if (Y1 - Y2 <= HitRange && Y2 - Y1 <= HitRange)
                 return true;
@@ -40,15 +39,24 @@ namespace Quests
                 return false;
         }
 
-        public static Body TheNearest(Body body1 ,List<Body> bodies)
-        {            
-            int check1;
-            List<Body> checked;
+        public static decimal GetSegmentLength(int X1, int Y1, int X2, int Y2)
+        {
+            return (decimal)Math.Sqrt(((X2 - X1) ^ 2) + ((Y2 - Y1) ^ 2));
+        }
 
-            foreach (var body2 in bodies)
+        public static List<Body> TheNearest(Body target ,List<Body> bodies, int length)
+        {
+            var result = new List<Body>();
+            // для каждого из bodies считаем длинну отрезка до target и возвращаем всех кто прошел
+            foreach(var body in bodies)
             {
-                check1 = (body1.X - body2.X) + (body1.Y - body2.Y);
+                var SegmentLength = GetSegmentLength(body.X, body.Y, target.X, target.Y);
+                if (SegmentLength <= length)
+                {
+                    result.Add(body);
+                }
             }
+            return result;
         }
     }
 }
