@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Quests
@@ -17,11 +18,21 @@ namespace Quests
             this.Y = Y;
         }
 
-        public static void AccomplishTakt(Totem totem, Character character)
+        public void AccomplishTakt(List<Body> bodies)
         {
-            if (Geometry.AreNear(totem, character))
+            Console.WriteLine($"");
+            Console.WriteLine($"Такт выполняет тотем {this}");
+
+            var charactersBodiesInRadius = Geometry.InRadius(this, bodies, 1);
+
+            var characters = charactersBodiesInRadius.Where(b => b is Character)
+                                                     .Select(o => o as Character);
+
+            foreach (var i in characters)
             {
-                character.Mana += 2;
+                i.Mana += 2;
+                Console.WriteLine($"Тотем {this} восстановил ману персонажу {charactersBodiesInRadius}. " +
+                    $"Его мана: {i.Mana}");
             }
         }
     }

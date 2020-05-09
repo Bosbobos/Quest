@@ -9,7 +9,7 @@ namespace Quests
     /// </summary>
     interface IAccoplishTakt
     {
-        public void AccomplishTakt()
+        public void AccomplishTakt(List<Body> bodies)
         {
         }
     }

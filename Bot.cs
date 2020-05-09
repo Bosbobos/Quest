@@ -15,6 +15,9 @@ namespace Quests
 
         public void AccomplishTakt(List<Body> bodies)
         {
+            Console.WriteLine($"");
+            Console.WriteLine($"Такт выполняет бот {this}");
+            
             // стукнуть ближайшего персонажа
             // если такого нет, то идем к ближайшему
 

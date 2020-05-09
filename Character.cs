@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Quests
 {
     public class Character : Body, IAttacker, IAccoplishTakt
     {
-        public int Mana = 100;
+        private int mana = 100;
+        public int Mana
+        {
+            get
+            {
+                return mana;
+            }
+            set
+            {
+                if (value <= 100)
+                    mana = value;
+                else
+                    mana = 100;
+            }
+        }
         public static int HitRange = 1;
         public Character(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
@@ -14,22 +29,32 @@ namespace Quests
             this.Y = Y;
         }
 
-        public void AccomplishTakt(Character character, Body body, Totem totem)
+        public void AccomplishTakt(List<Body> bodies)
         {
-            character.Mana += 5;
-            if (Geometry.AreNear(character, totem, HitRange))
-                character.Mana += 2;
-            Console.WriteLine(character.Mana);
+            Console.WriteLine($"");
+            Console.WriteLine($"Такт выполняет персонаж {this}");
 
-            if (body is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+            this.Mana += 5;
+            Console.WriteLine($"Мана персонажа { this } : { this.Mana }");
+
+            foreach (var body in bodies)
             {
-                body.Hp -= 0; // Ничего не наносим
-                character.Mana -= 20; // Но ману снимаем
-            }
-            else
-            {
-                body.Hp -= 15; // Уже наносим дамаг
-                character.Mana -= 20; // Но всё ещё снимаем ману
+                if (body is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+                {
+                    body.Hp -= 0; // Ничего не наносим
+                    Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
+
+                    this.Mana -= 20; // Но ману снимаем
+                    Console.WriteLine($"Мана персонажа: { this.Mana }.");
+                }
+                else
+                {
+                    body.Hp -= 15; // Уже наносим дамаг
+                    Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
+
+                    this.Mana -= 20; // Но всё ещё снимаем ману
+                    Console.WriteLine($"Мана персонажа: { this.Mana }.");
+                }
             }
         }
     }

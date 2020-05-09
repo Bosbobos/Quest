@@ -9,3 +9,14 @@ C:\Users\ok__\source\repos\Quests\obj\Debug\netcoreapp3.1\Quests.AssemblyInfoInp
 C:\Users\ok__\source\repos\Quests\obj\Debug\netcoreapp3.1\Quests.AssemblyInfo.cs
 C:\Users\ok__\source\repos\Quests\obj\Debug\netcoreapp3.1\Quests.dll
 C:\Users\ok__\source\repos\Quests\obj\Debug\netcoreapp3.1\Quests.pdb
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.exe
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.deps.json
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.runtimeconfig.json
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.runtimeconfig.dev.json
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.dll
+C:\Users\ok__\source\repos\Quest\bin\Debug\netcoreapp3.1\Quests.pdb
+C:\Users\ok__\source\repos\Quest\obj\Debug\netcoreapp3.1\Quests.csprojAssemblyReference.cache
+C:\Users\ok__\source\repos\Quest\obj\Debug\netcoreapp3.1\Quests.AssemblyInfoInputs.cache
+C:\Users\ok__\source\repos\Quest\obj\Debug\netcoreapp3.1\Quests.AssemblyInfo.cs
+C:\Users\ok__\source\repos\Quest\obj\Debug\netcoreapp3.1\Quests.dll
+C:\Users\ok__\source\repos\Quest\obj\Debug\netcoreapp3.1\Quests.pdb
