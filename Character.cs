@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Quests
 {
-    public class Character : Body, IAttacker, IAccoplishTakt
+    public class Character : Body, IAccoplishTakt
     {
         private int mana = 100;
         public int Mana
@@ -25,10 +25,9 @@ namespace Quests
             }
         }
         public static int HitRange = 1;
-        public Character(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
+
+        public Character(int X, int Y) : base(X, Y)
         {
-            this.X = X;
-            this.Y = Y;
         }
 
         public void AccomplishTakt(List<Body> bodies)

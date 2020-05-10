@@ -4,13 +4,12 @@ using System.Linq;
 
 namespace Quests
 {
-    public class Bot : Body, IAttacker, IAccoplishTakt
+    public class Bot : Body, IAccoplishTakt
     {
         public static int HitRange = 1;
-        public Bot(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
+
+        public Bot(int X, int Y) : base(X, Y)
         {
-            this.X = X;
-            this.Y = Y;
         }
 
         public void AccomplishTakt(List<Body> bodies)

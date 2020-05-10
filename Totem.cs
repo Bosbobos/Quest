@@ -12,10 +12,8 @@ namespace Quests
     {
         public string src = "./totem";
 
-        public Totem(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
+        public Totem(int X, int Y) : base(X, Y)
         {
-            this.X = X;
-            this.Y = Y;
         }
 
         public void AccomplishTakt(List<Body> bodies)

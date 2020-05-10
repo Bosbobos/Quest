@@ -19,7 +19,7 @@ namespace Quests
             {
                 foreach (var Accomplishers in IAccomplishers)
                     Accomplishers.AccomplishTakt(targets);
-                Thread.Sleep(5000);
+                Thread.Sleep(5000); // Только сейчас частота обновления 5 с, потом это будет 16.6 мс для 60 фпс
             }
         }
     }

@@ -22,6 +22,11 @@ namespace Quests
                 else
                     hp = 0;
             }
-        } 
+        }
+        public Body(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
+        {
+            this.X = X;
+            this.Y = Y;
+        }
     }
 }
