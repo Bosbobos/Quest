@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ok__\\source\\repos\\Quests\\Quests.csproj",
+      "projectUniqueName": "C:\\Users\\ok__\\source\\repos\\Quest\\Quests.csproj",
       "projectName": "Quests",
-      "projectPath": "C:\\Users\\ok__\\source\\repos\\Quests\\Quests.csproj",
+      "projectPath": "C:\\Users\\ok__\\source\\repos\\Quest\\Quests.csproj",
       "packagesPath": "C:\\Users\\ok__\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ok__\\source\\repos\\Quests\\obj\\",
+      "outputPath": "C:\\Users\\ok__\\source\\repos\\Quest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
