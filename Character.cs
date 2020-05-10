@@ -16,10 +16,12 @@ namespace Quests
             }
             set
             {
-                if (value <= 100)
+                if (value <= 100 && value >= 0)
                     mana = value;
-                else
+                else if (value > 100)
                     mana = 100;
+                else if (value < 0)
+                    mana = 0;
             }
         }
         public static int HitRange = 1;
@@ -39,22 +41,30 @@ namespace Quests
 
             foreach (var body in bodies)
             {
-                if (body is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+                if (mana >= 20)
                 {
-                    body.Hp -= 0; // Ничего не наносим
-                    Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
+                    if (!(body is Character))
+                    {
+                        if (body is IUnhittable) // Проверяем воспринимает ли цель не физ урон
+                        {
+                            body.Hp -= 0; // Ничего не наносим
+                            Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
 
-                    this.Mana -= 20; // Но ману снимаем
-                    Console.WriteLine($"Мана персонажа: { this.Mana }.");
+                            this.Mana -= 20; // Но ману снимаем
+                            Console.WriteLine($"Мана персонажа: { this.Mana }.");
+                        }
+                        else
+                        {
+                            body.Hp -= 15; // Уже наносим дамаг
+                            Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
+
+                            this.Mana -= 20; // Но всё ещё снимаем ману
+                            Console.WriteLine($"Мана персонажа: { this.Mana }.");
+                        }
+                    }
                 }
                 else
-                {
-                    body.Hp -= 15; // Уже наносим дамаг
-                    Console.WriteLine($"Персонаж бьёт { body }. Хп цели: {body.Hp}");
-
-                    this.Mana -= 20; // Но всё ещё снимаем ману
-                    Console.WriteLine($"Мана персонажа: { this.Mana }.");
-                }
+                    Console.WriteLine($"Недостаточно маны для удара. Мана персонажа: {this.Mana}");
             }
         }
     }

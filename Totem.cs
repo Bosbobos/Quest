@@ -23,7 +23,7 @@ namespace Quests
             Console.WriteLine($"");
             Console.WriteLine($"Такт выполняет тотем {this}");
 
-            var charactersBodiesInRadius = Geometry.InRadius(this, bodies, 1);
+            var charactersBodiesInRadius = Geometry.InRadius(this, bodies, 2);
 
             var characters = charactersBodiesInRadius.Where(b => b is Character)
                                                      .Select(o => o as Character);
@@ -31,7 +31,7 @@ namespace Quests
             foreach (var i in characters)
             {
                 i.Mana += 2;
-                Console.WriteLine($"Тотем {this} восстановил ману персонажу {charactersBodiesInRadius}. " +
+                Console.WriteLine($"Тотем {this} восстановил ману персонажу {i}. " +
                     $"Его мана: {i.Mana}");
             }
         }
