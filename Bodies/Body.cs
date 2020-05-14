@@ -23,6 +23,8 @@ namespace Quests
                     hp = 0;
             }
         }
+
+        public Guid Id = new Guid();
         public Body(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
             this.X = X;

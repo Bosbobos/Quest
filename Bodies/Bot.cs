@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Quests
 {
@@ -32,6 +33,8 @@ namespace Quests
                 Character target = charactersBodiesInRadius.First() as Character;
                 target.Hp -= 30; // бьем цель
                 Console.WriteLine($"Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
+
+                Thread.Sleep(500);
             }
             else // идем в нему
             {
@@ -59,6 +62,8 @@ namespace Quests
                     this.Y++;
                     Console.WriteLine($"Y бота меньше Y цели. Бот идёт к цели. Y бота { this.Y }");
                 }
+                
+                Thread.Sleep(1000);
             }            
         }
     }
