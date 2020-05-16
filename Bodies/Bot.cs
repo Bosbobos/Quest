@@ -12,6 +12,7 @@ namespace Quests
 
         public Bot(int X, int Y) : base(X, Y)
         {
+            Armour = 0.15m;
         }
 
         public TimeSpan HitCooldown { get; set; } = new TimeSpan(0, 0, 0, 0, 500);
@@ -39,9 +40,20 @@ namespace Quests
                 {
                     if (CycleManager.CanKast(LastHit, HitCooldown))
                     {
-                        target.Hp -= 30; // бьем цель
-                        Console.WriteLine("");
-                        Console.WriteLine($"Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
+                        if (target.EnergoShield > 0)
+                        {
+                            target.EnergoShield -= (30 - 30 * target.Armour);
+                            
+                            Console.WriteLine("");
+                            Console.WriteLine($"Бот ударил по энергощиту. Цель: { target }. Хп щита: { target.EnergoShield }");
+                        }
+                        else
+                        {
+                            target.Hp -= (30 - 30 * target.Armour);
+
+                            Console.WriteLine("");
+                            Console.WriteLine($"Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
+                        }
 
                         LastHit = DateTime.Now;
                     }

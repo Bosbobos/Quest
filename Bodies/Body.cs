@@ -25,6 +25,8 @@ namespace Quests
         }
 
         public Guid Id = new Guid();
+
+        public decimal Armour { get; set; }
         public Body(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
             this.X = X;

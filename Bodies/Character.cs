@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Quests
 {
@@ -29,11 +30,18 @@ namespace Quests
         }
         public static int HitRange = 1;
 
+        public decimal EnergoShield;
+
         public TimeSpan ManaRegenCooldown { get; set; } = new TimeSpan(0, 0, 0, 2);
         public DateTime LastManaRegen { get; set; }
 
+        public TimeSpan EnergoShieldCooldown { get; set; } = new TimeSpan(0, 0, 0, 10);
+        public DateTime LastEnergoShield { get; set; }
+        public TimeSpan EnergoShieldKastTime { get; set; } = new TimeSpan(0, 0, 0, 0, 900);
+
         public Character(int X, int Y) : base(X, Y)
         {
+            Armour = 0.2m;
         }
 
         public List<Magic> Magics { get; set; } = new List<Magic>();
@@ -65,6 +73,17 @@ namespace Quests
                     }
                     // Потом тут будет елс иф небоевая магия и то что она делает
                 }
+            }
+
+            if (CycleManager.CanKast(LastEnergoShield, EnergoShieldCooldown) && EnergoShield < 50)
+            {
+                Thread.Sleep(EnergoShieldKastTime);
+
+                EnergoShield = 50m;
+                Console.WriteLine("");
+                Console.WriteLine($"Персонаж {this} наложил на себя энергощит");
+
+                LastEnergoShield = DateTime.Now;
             }
         }
     }
