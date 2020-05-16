@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quests.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,11 +14,13 @@ namespace Quests
         {
         }
 
+        public TimeSpan HitCooldown { get; set; } = new TimeSpan(0, 0, 0, 0, 500);
+        public TimeSpan MoveCooldown { get; set; } = new TimeSpan(0, 0, 0, 1);
+        public DateTime LastHit { get; set; }
+        public DateTime LastMove { get; set; }
+
         public void AccomplishTakt(List<Body> bodies)
-        {
-            Console.WriteLine($"");
-            Console.WriteLine($"Такт выполняет бот {this}");
-            
+        {            
             // стукнуть ближайшего персонажа
             // если такого нет, то идем к ближайшему
 
@@ -31,39 +34,57 @@ namespace Quests
             if (charactersBodiesInRadius.Count > 0) // если рядом кто-то есть, то бьем его
             {
                 Character target = charactersBodiesInRadius.First() as Character;
-                target.Hp -= 30; // бьем цель
-                Console.WriteLine($"Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
 
-                Thread.Sleep(500);
+                if (target.Hp > 0)
+                {
+                    if (CycleManager.CanKast(LastHit, HitCooldown))
+                    {
+                        target.Hp -= 30; // бьем цель
+                        Console.WriteLine("");
+                        Console.WriteLine($"Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
+
+                        LastHit = DateTime.Now;
+                    }
+                }
             }
             else // идем в нему
             {
                 Character target = charactersBodies.First() as Character;
-                
-                // меняем координаты this.X и Y в сторону перса
-                if (this.X > target.X)
+
+                if (target.Hp > 0)
                 {
-                    this.X--;
-                    Console.WriteLine($"Х бота больше Х цели. Бот идёт к цели. Х бота: { this.X }");
+                    if (CycleManager.CanKast(LastMove, MoveCooldown))
+                    {
+                        // меняем координаты this.X и Y в сторону перса
+                        if (this.X > target.X)
+                        {
+                            this.X--;
+                            Console.WriteLine("");
+                            Console.WriteLine($"Х бота больше Х цели. Бот идёт к цели. Х бота: { this.X }");
+                        }
+                        else if (this.X < target.X)
+                        {
+                            this.X++;
+                            Console.WriteLine("");
+                            Console.WriteLine($"Х бота меньше Х цели. Бот идёт к цели. Х бота: { this.X }");
+                        }
+
+                        if (this.Y > target.Y)
+                        {
+                            this.Y--;
+                            Console.WriteLine("");
+                            Console.WriteLine($"Y бота больше Y цели. Бот идёт к цели. Y бота: { this.Y }");
+                        }
+                        else if (this.X < target.X)
+                        {
+                            this.Y++;
+                            Console.WriteLine("");
+                            Console.WriteLine($"Y бота меньше Y цели. Бот идёт к цели. Y бота { this.Y }");
+                        }
+
+                        LastMove = DateTime.Now;
+                    }
                 }
-                else if (this.X < target.X)
-                {
-                    this.X++;
-                    Console.WriteLine($"Х бота меньше Х цели. Бот идёт к цели. Х бота: { this.X }");
-                }
-                
-                if (this.Y > target.Y)
-                {
-                    this.Y--;
-                    Console.WriteLine($"Y бота больше Y цели. Бот идёт к цели. Y бота: { this.Y }");
-                }   
-                else if (this.X < target.X)
-                {
-                    this.Y++;
-                    Console.WriteLine($"Y бота меньше Y цели. Бот идёт к цели. Y бота { this.Y }");
-                }
-                
-                Thread.Sleep(1000);
             }            
         }
     }

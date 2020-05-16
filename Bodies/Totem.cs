@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quests.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,15 @@ namespace Quests
     {
         public string src = "./totem";
 
+        public TimeSpan ManaRegenCooldown { get; set; } = new TimeSpan(0, 0, 0, 2);
+        public DateTime LastManaRegen { get; set; }
+
         public Totem(int X, int Y) : base(X, Y)
         {
         }
 
         public void AccomplishTakt(List<Body> bodies)
         {
-            Console.WriteLine($"");
-            Console.WriteLine($"Такт выполняет тотем {this}");
-
             var charactersBodiesInRadius = Geometry.InRadius(this, bodies, 2);
 
             var characters = charactersBodiesInRadius.Where(b => b is Character)
@@ -28,9 +29,16 @@ namespace Quests
 
             foreach (var i in characters)
             {
-                i.Mana += 2;
-                Console.WriteLine($"Тотем {this} восстановил ману персонажу {i}. " +
-                    $"Его мана: {i.Mana}");
+                if (CycleManager.CanKast(LastManaRegen, ManaRegenCooldown))
+                {
+                    i.Mana += 2;
+
+                    Console.WriteLine("");
+                    Console.WriteLine($"Тотем {this} восстановил ману персонажу {i}. " +
+                        $"Его мана: {i.Mana}");
+
+                    LastManaRegen = DateTime.Now;
+                }
             }
         }
     }

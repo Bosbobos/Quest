@@ -8,12 +8,5 @@ namespace Quests.Magics
     {
         public TimeSpan Cooldown { get; set; }
         public DateTime LastMagicKast { get; set; }
-        public bool CanKast()
-        {
-            if (LastMagicKast + Cooldown < DateTime.Now)
-                return true;
-            else
-                return false;
-        }
     }
 }
