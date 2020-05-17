@@ -1,4 +1,4 @@
-﻿using Quests.Tools;
+﻿using Quests.Magics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace Quests
 
             foreach (var i in characters)
             {
-                if (CycleManager.CanKast(LastManaRegen, ManaRegenCooldown))
+                if (Magic.CanKast(LastManaRegen, ManaRegenCooldown) && i.Mana < 100)
                 {
                     i.Mana += 2;
 

@@ -1,4 +1,4 @@
-﻿using Quests.Tools;
+﻿using Quests.Magics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace Quests
 
                 if (target.Hp > 0)
                 {
-                    if (CycleManager.CanKast(LastHit, HitCooldown))
+                    if (Magic.CanKast(LastHit, HitCooldown))
                     {
                         if (target.EnergoShield > 0)
                         {
@@ -65,7 +65,7 @@ namespace Quests
 
                 if (target.Hp > 0)
                 {
-                    if (CycleManager.CanKast(LastMove, MoveCooldown))
+                    if (Magic.CanKast(LastMove, MoveCooldown))
                     {
                         // меняем координаты this.X и Y в сторону перса
                         if (this.X > target.X)

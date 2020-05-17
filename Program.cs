@@ -14,19 +14,23 @@ namespace Quests
             var totem = new Totem(1, 1);
 
             var magicArrow = new MagicArrow();
+            var manaRegen = new ManaRegen();
+            var energoShield = new EnergoShield();
 
             var IAccomplishers = new List<IAccoplishTakt> { bot, character, totem };
             var targets = new List<Body> { character, bot, totem };
 
             character.Magics.Add(magicArrow);
+            character.Magics.Add(manaRegen);
+            character.Magics.Add(energoShield);
 
             while (true)
             {
                 foreach (var Accomplishers in IAccomplishers)
                 {
-                    Accomplishers.AccomplishTakt(targets);
-                    Thread.Sleep(16);
+                    Accomplishers.AccomplishTakt(targets);                    
                 }
+                Thread.Sleep(16);
             }
         }
     }
