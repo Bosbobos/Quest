@@ -19,7 +19,7 @@ namespace Quests
             var manaRegen = new ManaRegen();
             var energoShield = new EnergoShield();
 
-            var IAccomplishers = new List<Body> {  /*botMelee, totem */character, botArcher };
+            var IAccomplishers = new List<Body> {  botMelee, totem, character, botArcher };
 
             character.Magics.Add(magicArrow);
             character.Magics.Add(manaRegen);
@@ -27,14 +27,18 @@ namespace Quests
 
             while (true)
             {
-                foreach (var Accomplishers in IAccomplishers)
+                for (var i = 0; i < IAccomplishers.Count; i++)
                 {
-                    if (Accomplishers.Hp == 0)
+                    var Accomplisher = IAccomplishers[i];
+
+                    if (Accomplisher.Hp == 0)
                     {
-                        IAccomplishers.Remove(Accomplishers);
+                        IAccomplishers.Remove(Accomplisher);
                     }
-                    Accomplishers.AccomplishTakt(IAccomplishers);                    
+
+                    Accomplisher.AccomplishTakt(IAccomplishers);
                 }
+                
                 Thread.Sleep(16);
             }
         }

@@ -38,7 +38,7 @@ namespace Quests.Bodies
 
                 Hit(target);
             }
-            else // идем в нему 
+            else if (charactersBodies.Count > 0) // идем в нему 
             {
                 Character target = charactersBodies.First() as Character;
 
