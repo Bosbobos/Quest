@@ -12,5 +12,10 @@ namespace Quests
         public Rock (int X, int Y) : base(X, Y)
         {
         }
+
+        public override void AccomplishTakt(List<Body> bodies)
+        {
+
+        }
     }
 }

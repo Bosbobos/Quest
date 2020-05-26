@@ -34,13 +34,13 @@ namespace Quests.Magics
 
                             attacker.Mana -= 20; // Но всё ещё снимаем ману
                             Console.WriteLine($"Мана персонажа: { attacker.Mana }.");
-                        }
-
-                        LastMagicKast = DateTime.Now;
+                        }                        
                     }
                 }
                 else
                     Console.WriteLine($"Недостаточно маны для удара. Мана персонажа: {attacker.Mana}");
+
+                LastMagicKast = DateTime.Now;
             }
         }
     }

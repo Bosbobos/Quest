@@ -37,13 +37,16 @@ namespace Quests
 
         public List<Magic> Magics { get; set; } = new List<Magic>();
 
-        public void AccomplishTakt(List<Body> bodies)
+        public override void AccomplishTakt(List<Body> bodies)
         {
-            foreach (var body in bodies)
+            if (Hp > 0)
             {
-                foreach (var i in Magics)
+                foreach (var body in bodies)
                 {
-                    i.DoSomething(this, body);
+                    foreach (var i in Magics)
+                    {
+                        i.DoSomething(this, body);
+                    }
                 }
             }
         }
