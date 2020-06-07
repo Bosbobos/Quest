@@ -54,14 +54,6 @@ namespace Quests.Bodies
                         Console.WriteLine($"{this}: Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
                     }
 
-                    Statistics.TotalMeleeHits++;
-                    Statistics.TotalHits++;
-                    Statistics.TotalDamage += DamageDealt;
-
-                    Console.WriteLine($"Всего нанесено ближних ударов: {Statistics.TotalMeleeHits}");
-                    Console.WriteLine($"Всего нанесено ударов: {Statistics.TotalHits}");
-                    Console.WriteLine($"Всего нанесено урона: {Statistics.TotalDamage}");
-
                     LastHit = DateTime.Now;
                 }
             }

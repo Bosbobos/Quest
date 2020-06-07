@@ -58,14 +58,6 @@ namespace Quests.Bodies
                         }
                     }
 
-                    Statistics.TotalRangedHits++;
-                    Statistics.TotalHits++;
-                    Statistics.TotalDamage += DamageDealt;
-
-                    Console.WriteLine($"Всего нанесено дальних ударов: {Statistics.TotalRangedHits}");
-                    Console.WriteLine($"Всего нанесено ударов: {Statistics.TotalHits}");
-                    Console.WriteLine($"Всего нанесено урона: {Statistics.TotalDamage}");
-
                     LastHit = DateTime.Now;
                 }               
             }

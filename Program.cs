@@ -1,5 +1,6 @@
 ﻿using Quests.Bodies;
 using Quests.Magics;
+using Quests.Tools;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,7 +11,7 @@ namespace Quests
     {
         static void Main(string[] args)
         {
-            var character = new Character(0, 0) { Hp = 100 };
+            var character = new Character(0, 0);
             var botMelee = new BotMelee(3, 2);
             var totem = new Totem(1, 1);
             var botArcher = new BotArcher(5, 5);
@@ -21,21 +22,20 @@ namespace Quests
 
             var IAccomplishers = new List<Body> {  botMelee, totem, character, botArcher };
 
+            foreach (var Accomplisher in IAccomplishers)
+            {
+                Accomplisher.IGotHitEvent += Events.NewHit;
+                Accomplisher.IGotDamageEvent += Events.DealtDamage;
+            }
+
             character.Magics.Add(magicArrow);
             character.Magics.Add(manaRegen);
             character.Magics.Add(energoShield);
 
             while (true)
             {
-                for (var i = 0; i < IAccomplishers.Count; i++)
-                {
-                    var Accomplisher = IAccomplishers[i];
-
-                    if (Accomplisher.Hp == 0)
-                    {
-                        IAccomplishers.Remove(Accomplisher);
-                    }
-
+                foreach (var Accomplisher in IAccomplishers)
+                { 
                     Accomplisher.AccomplishTakt(IAccomplishers);
                 }
                 
