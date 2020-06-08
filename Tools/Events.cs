@@ -6,21 +6,14 @@ namespace Quests.Tools
 {
     public static class Events
     {
-        public static void NewHit()
+        public static void NewHit(decimal damage)
         {
             Statistics.TotalHits++;
-            Console.WriteLine($"Всего нанесено ударов: {Statistics.TotalHits}");
-        }
-
-        public static void DealtDamage(decimal damage)
-        {
             Statistics.TotalDamage += damage;
+
+            Console.WriteLine("");
             Console.WriteLine($"Всего нанесено урона: {Statistics.TotalDamage}");
-        }
-
-        public static void Death()
-        {
-
+            Console.WriteLine($"Всего нанесено ударов: {Statistics.TotalHits}");
         }
     }
 }

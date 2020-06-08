@@ -39,14 +39,11 @@ namespace Quests
 
         public override void AccomplishTakt(List<Body> bodies)
         {
-            if (Hp > 0)
+            foreach (var body in bodies)
             {
-                foreach (var body in bodies)
+                foreach (var i in Magics)
                 {
-                    foreach (var i in Magics)
-                    {
-                        i.DoSomething(this, body);
-                    }
+                    i.DoSomething(this, body);
                 }
             }
         }

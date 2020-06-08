@@ -18,29 +18,23 @@ namespace Quests
 
             var magicArrow = new MagicArrow();
             var manaRegen = new ManaRegen();
-            var energoShield = new EnergoShield();
+            var energoShield = new EnergoShield();           
 
             var IAccomplishers = new List<Body> {  botMelee, totem, character, botArcher };
 
+            var cycleManager = new CycleManager(IAccomplishers);
+
             foreach (var Accomplisher in IAccomplishers)
             {
-                Accomplisher.IGotHitEvent += Events.NewHit;
-                Accomplisher.IGotDamageEvent += Events.DealtDamage;
+                Accomplisher.IGotDamageEvent += Events.NewHit;
+                Accomplisher.IDiedEvent += cycleManager.DeathEventHandler;
             }
 
             character.Magics.Add(magicArrow);
             character.Magics.Add(manaRegen);
             character.Magics.Add(energoShield);
 
-            while (true)
-            {
-                foreach (var Accomplisher in IAccomplishers)
-                { 
-                    Accomplisher.AccomplishTakt(IAccomplishers);
-                }
-                
-                Thread.Sleep(16);
-            }
+            cycleManager.AccomplishCycle();
         }
     }
 }

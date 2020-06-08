@@ -7,9 +7,11 @@ namespace Quests
     public abstract class Body
     {
         public delegate void IGotDamage(decimal damage);
-        public event Action IGotHitEvent;
+        public delegate void IDied(Body body);
+
         public event IGotDamage IGotDamageEvent;
-        public event Action IDied;
+        public event IDied IDiedEvent;
+        
 
         private int x; 
         public int X {
@@ -51,13 +53,15 @@ namespace Quests
             }
             set
             {
-                if (value >= 0)
+                IGotDamageEvent?.Invoke(hp - value);
+
+                if (value > 0)
                     hp = value;
                 else
-                    IDied?.Invoke();
-
-                IGotHitEvent?.Invoke();
-                IGotDamageEvent?.Invoke(value);
+                {
+                    hp = 0;
+                    IDiedEvent?.Invoke(this);
+                }                
             }
         }
 

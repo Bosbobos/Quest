@@ -21,7 +21,7 @@ namespace Quests.Bodies
 
         public override void Hit(Body target)
         {
-            if (target.Hp > 0 && this.Id != target.Id)
+            if (this.Id != target.Id && target.Hp > 0)
             {
                 if (Magic.CanKast(LastHit, HitCooldown))
                 {
