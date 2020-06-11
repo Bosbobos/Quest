@@ -41,20 +41,20 @@ namespace Quests.Bodies
                             }
                             else
                             {
-                                _target.Hp -= DamageDealt;
-
                                 Console.WriteLine("");
-                                Console.WriteLine($"{this}: Бот ударил по персонажу { _target }. Хп цели: { _target.Hp }");
+                                Console.WriteLine($"{this}: Бот ударил по персонажу { _target }. Хп цели: { _target.Hp - DamageDealt}");
+
+                                _target.Hp -= DamageDealt;
                             }
                             Geometry.FlyAway(this, _target);
                         }
                         else
                         {
+                            Console.WriteLine("");
+                            Console.WriteLine($"{this}: Бот ударил. Цель: { target }. Хп цели: { target.Hp - DamageDealt}");
+
                             target.Hp -= DamageDealt;
                             Geometry.FlyAway(this, target);
-
-                            Console.WriteLine("");
-                            Console.WriteLine($"{this}: Бот ударил. Цель: { target }. Хп цели: { target.Hp }");
                         }
                     }
 
