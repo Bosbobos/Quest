@@ -20,7 +20,7 @@ namespace Quests
         {
         }
 
-        public void AccomplishTakt(List<Body> bodies)
+        public override void AccomplishTakt(List<Body> bodies)
         {
             var charactersBodiesInRadius = Geometry.InRadius(this, bodies, 2);
 

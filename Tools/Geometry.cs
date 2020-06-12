@@ -42,5 +42,25 @@ namespace Quests
             }
             return result;
         }
+
+        public static bool SmbInBetween()
+        {
+            return false;
+        }
+
+        public static void FlyAway(Body attacker, Body target)
+        {
+            if (attacker.X > target.X)
+                target.X -= 1;
+            else if (attacker.X < target.X)
+                target.X += 1;
+            else if (attacker.Y > target.Y)
+                target.Y -= 1;
+            else if (attacker.Y < target.Y)
+                target.Y += 1;
+
+            Console.WriteLine("");
+            Console.WriteLine($"{target} отлетел. Его Х: {target.X}. Его У: {target.Y}");
+        }
     }
 }

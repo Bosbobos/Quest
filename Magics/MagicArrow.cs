@@ -29,18 +29,18 @@ namespace Quests.Magics
                         }
                         else
                         {
+                            Console.WriteLine($"Персонаж бьёт { target }. Хп цели: {target.Hp - 15}");
                             target.Hp -= 15; // Уже наносим дамаг
-                            Console.WriteLine($"Персонаж бьёт { target }. Хп цели: {target.Hp}");
 
                             attacker.Mana -= 20; // Но всё ещё снимаем ману
                             Console.WriteLine($"Мана персонажа: { attacker.Mana }.");
-                        }
-
-                        LastMagicKast = DateTime.Now;
+                        }                        
                     }
                 }
                 else
                     Console.WriteLine($"Недостаточно маны для удара. Мана персонажа: {attacker.Mana}");
+
+                LastMagicKast = DateTime.Now;
             }
         }
     }

@@ -11,5 +11,10 @@ namespace Quests
         public Bush(int X, int Y) : base (X, Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
         }
+
+        public override void AccomplishTakt(List<Body> bodies)
+        {
+
+        }
     }
 }

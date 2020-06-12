@@ -9,6 +9,9 @@ namespace Quests
     /// </summary>
     interface IAccoplishTakt
     {
+        /// <summary> выполнить такт </summary>
+        /// <param name="bodies"></param>
+        /// <exception cref="NullReferenceException"> нельзя чтобы bodies был null </exception>
         public void AccomplishTakt(List<Body> bodies);
     }
 }
