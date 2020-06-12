@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quests.Magics;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -12,14 +13,24 @@ namespace Quests
             var bot = new Bot(3, 2);
             var totem = new Totem(1, 1);
 
-            var IAccomplishers = new List<IAccoplishTakt> { character, bot, totem };
+            var magicArrow = new MagicArrow();
+            var manaRegen = new ManaRegen();
+            var energoShield = new EnergoShield();
+
+            var IAccomplishers = new List<IAccoplishTakt> { bot, character, totem };
             var targets = new List<Body> { character, bot, totem };
+
+            character.Magics.Add(magicArrow);
+            character.Magics.Add(manaRegen);
+            character.Magics.Add(energoShield);
 
             while (true)
             {
                 foreach (var Accomplishers in IAccomplishers)
-                    Accomplishers.AccomplishTakt(targets);
-                Thread.Sleep(5000); // Только сейчас частота обновления 5 с, потом это будет 16.6 мс для 60 фпс
+                {
+                    Accomplishers.AccomplishTakt(targets);                    
+                }
+                Thread.Sleep(16);
             }
         }
     }

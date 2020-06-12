@@ -9,10 +9,8 @@ namespace Quests
         public new decimal Hp { get; set; } = 1000m;
         public string src = "./rock";
 
-        public Rock (int X, int Y)
+        public Rock (int X, int Y) : base(X, Y)
         {
-            this.X = X;
-            this.Y = Y;
         }
     }
 }

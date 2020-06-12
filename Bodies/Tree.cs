@@ -8,10 +8,8 @@ namespace Quests
     {
         public string src = "./tree";
 
-        public Tree(int X, int Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
+        public Tree(int X, int Y) : base(X, Y) // Конструктор, чтобы мы могли указывать координаты рядом в скобках
         {
-            this.X = X;
-            this.Y = Y;
         }
     }
 }
